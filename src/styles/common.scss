@@ -1,3 +1,13 @@
 .cart-btn {
   @apply bg-linear-to-r from-orange-400 to-pink-400 hover:from-orange-500 hover:to-pink-500 text-white py-3 px-6 rounded-lg font-medium hover:scale-105 transition-transform cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-orange-400 disabled:hover:to-pink-400 disabled:hover:scale-100;
 }
+
+/* 隱藏滾動條但保持可滾動功能 */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
