@@ -97,26 +97,26 @@ export const Cart = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-6">購物車</h1>
+    <div className="max-w-7xl mx-auto px-4 md:px-6 xl:px-8 py-6 md:py-8 xl:py-10">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">購物車</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <section className="lg:col-span-2">
-          <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
+          <div className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 space-y-3 md:space-y-4">
             {items.carts.length === 0 ? (
-              <div className="text-center py-10">
-                <div className="text-4xl mb-4">🛒</div>
-                <div className="text-lg font-semibold">您的購物車是空的</div>
-                <div className="mt-4">
-                  <Link to="/products" className="text-orange-500 hover:underline">
+              <div className="text-center py-8 md:py-10">
+                <div className="text-3xl md:text-4xl mb-3 md:mb-4">🛒</div>
+                <div className="text-base md:text-lg font-semibold">您的購物車是空的</div>
+                <div className="mt-3 md:mt-4">
+                  <Link to="/products" className="text-orange-500 hover:underline text-sm md:text-base">
                     去逛逛商品
                   </Link>
                 </div>
               </div>
             ) : (
               items.carts.map((item) => (
-                <div key={item.product.id} className="flex items-center gap-4">
-                  <div className="w-28 h-28 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                <div key={item.product.id} className="flex items-center gap-3 md:gap-4">
+                  <div className="w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 bg-gray-100 rounded-lg overflow-hidden shrink-0">
                     <img
                       src={item.product.imageUrl || 'https://via.placeholder.com/200?text=No+Image'}
                       alt={item.product.title}
@@ -124,40 +124,40 @@ export const Cart = () => {
                     />
                   </div>
 
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="font-bold text-lg">{item.product.title}</div>
-                        <div className="text-gray-500 text-sm mt-1">NT${item.product.price}</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-sm md:text-base xl:text-lg truncate">{item.product.title}</div>
+                        <div className="text-gray-500 text-xs md:text-sm mt-1">NT${item.product.price}</div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-lg font-semibold text-orange-500">NT${item.final_total}</div>
+                      <div className="text-right shrink-0">
+                        <div className="text-base md:text-lg font-semibold text-orange-500">NT${item.final_total}</div>
                         <button
                           type="button"
                           onClick={() => handleOpenTipsModal(item)}
-                          className="text-sm text-gray-400 hover:text-red-500 mt-2 cursor-pointer"
+                          className="text-xs md:text-sm text-gray-400 hover:text-red-500 mt-1 md:mt-2 cursor-pointer"
                         >
                           刪除
                         </button>
                       </div>
                     </div>
 
-                    <div className="mt-4 flex items-center gap-3">
-                      <div className="flex items-center gap-2">
+                    <div className="mt-3 md:mt-4 flex items-center gap-2 md:gap-3">
+                      <div className="flex items-center gap-1 md:gap-2">
                         <button
                           type="button"
                           onClick={() => changeQty(item, item.qty - 1)}
                           disabled={btnLoading[`cart_${item.id}`]}
-                          className="cart-btn !px-3 !py-1"
+                          className="cart-btn px-2! md:px-3! py-1! text-sm! md:text-base!"
                         >
                           -
                         </button>
-                        <div className="px-2 min-w-10 text-center">{item.qty}</div>
+                        <div className="px-2 min-w-8 md:min-w-10 text-center text-sm md:text-base">{item.qty}</div>
                         <button
                           type="button"
                           onClick={() => changeQty(item, item.qty + 1)}
                           disabled={btnLoading[`cart_${item.id}`]}
-                          className="cart-btn !px-3 !py-1"
+                          className="cart-btn px-2! md:px-3! py-1! text-sm! md:text-base!"
                         >
                           +
                         </button>
@@ -171,24 +171,24 @@ export const Cart = () => {
         </section>
 
         <aside>
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">訂單摘要</h2>
-            <div className="flex justify-between text-gray-600 mb-2">
+          <div className="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 sticky top-4">
+            <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4">訂單摘要</h2>
+            <div className="flex justify-between text-gray-600 mb-2 text-sm md:text-base">
               <div>小計</div>
               <div>NT${subtotal}</div>
             </div>
-            <div className="flex justify-between text-gray-600 mb-2">
+            <div className="flex justify-between text-gray-600 mb-2 text-sm md:text-base">
               <div>運費</div>
               <div>{shipping === 0 ? '免運' : `NT${shipping}`}</div>
             </div>
-            <div className="border-t mt-4 pt-4 flex justify-between items-center">
-              <div className="text-lg font-bold">總計</div>
-              <div className="text-2xl font-bold text-orange-500">NT${total}</div>
+            <div className="border-t mt-3 md:mt-4 pt-3 md:pt-4 flex justify-between items-center">
+              <div className="text-base md:text-lg font-bold">總計</div>
+              <div className="text-xl md:text-2xl font-bold text-orange-500">NT${total}</div>
             </div>
 
             <button
               disabled={isCartEmpty}
-              className="py-3 px-6 mt-6 w-full cart-btn block text-center"
+              className="py-3 px-4 md:px-6 mt-4 md:mt-6 w-full cart-btn block text-center text-sm md:text-base"
               onClick={() => goCheckout()}
             >
               前往結帳
