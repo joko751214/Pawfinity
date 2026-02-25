@@ -63,11 +63,12 @@ export const Product = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <div className="bg-white rounded-2xl shadow-lg p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <div className="aspect-square bg-gray-100 rounded-xl overflow-hidden">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 xl:py-10">
+      <div className="bg-white rounded-lg md:rounded-xl xl:rounded-2xl shadow-lg p-4 md:p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 xl:gap-8">
+          {/* 圖片區塊 - 375px: 全寬, 768px: 左半邊, 1280px: 左側 1/3 */}
+          <div className="md:col-span-1 xl:col-span-1">
+            <div className="aspect-square bg-gray-100 rounded-lg md:rounded-xl overflow-hidden">
               <img
                 src={product.imageUrl || 'https://via.placeholder.com/600?text=No+Image'}
                 alt={product.title}
@@ -76,44 +77,56 @@ export const Product = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-2">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.title}</h1>
-                <div className="mb-3">
-                  <span className="inline-block bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-semibold">
+          {/* 內容區塊 - 375px: 全寬, 768px: 右半邊, 1280px: 右側 2/3 */}
+          <div className="md:col-span-1 xl:col-span-2">
+            {/* 標題和價格區塊 */}
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4">
+              <div className="flex-1">
+                <h1 className="text-xl md:text-2xl xl:text-3xl font-bold text-gray-800 mb-2">{product.title}</h1>
+                <div className="mb-2 md:mb-3">
+                  <span className="inline-block bg-orange-100 text-orange-600 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-semibold">
                     {product.category || '其他'}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-6 line-clamp-3">{product.description || '暫無描述'}</p>
+                <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 line-clamp-2 md:line-clamp-3">
+                  {product.description || '暫無描述'}
+                </p>
               </div>
 
-              <div className="text-right">
-                <div className="text-3xl font-bold text-orange-500">${product.price?.toLocaleString()}</div>
+              {/* 價格區塊 */}
+              <div className="text-left md:text-right flex md:flex-col gap-2 md:gap-0 items-center md:items-end">
+                <div className="text-2xl md:text-3xl font-bold text-orange-500">${product.price?.toLocaleString()}</div>
                 {product.origin_price > product.price && (
-                  <div className="text-sm text-gray-400 line-through">${product.origin_price?.toLocaleString()}</div>
+                  <div className="text-xs md:text-sm text-gray-400 line-through">
+                    ${product.origin_price?.toLocaleString()}
+                  </div>
                 )}
               </div>
             </div>
 
-            <div className="mt-6 flex gap-4">
+            {/* 按鈕區塊 */}
+            <div className="mt-4 md:mt-6 flex flex-col sm:flex-row gap-3 md:gap-4">
               <button
                 type="button"
                 onClick={() => handleAddToCart()}
                 disabled={btnLoading[`cart_${product.id}`]}
-                className="cart-btn"
+                className="cart-btn w-full sm:w-auto flex-1 sm:flex-none py-3 px-4 md:px-6 text-sm md:text-base"
               >
                 加入購物車
               </button>
 
-              <Link to="/products" className="py-3 px-6 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800">
+              <Link
+                to="/products"
+                className="w-full sm:w-auto py-3 px-4 md:px-6 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 text-center text-sm md:text-base"
+              >
                 回到列表
               </Link>
             </div>
 
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-2">商品詳情</h3>
-              <div className="prose max-w-none text-gray-700">
+            {/* 商品詳情區塊 */}
+            <div className="mt-6 md:mt-8">
+              <h3 className="text-base md:text-lg font-semibold mb-2">商品詳情</h3>
+              <div className="prose prose-sm md:prose max-w-none text-gray-700">
                 {product.content || product.description || '此商品尚無額外內容'}
               </div>
             </div>
