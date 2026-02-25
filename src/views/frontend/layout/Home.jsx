@@ -36,6 +36,9 @@ const LayoutInner = () => {
             <Link to="/products" className="hover:underline">
               商品列表
             </Link>
+            <Link to="/about" className="hover:underline">
+              關於我們
+            </Link>
             <Link to="/cart" className="hover:underline">
               購物車
             </Link>
